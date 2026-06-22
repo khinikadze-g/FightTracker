@@ -1,4 +1,6 @@
-﻿using FightTracker.Infrastructure.Data;
+﻿using FightTracker.Core.Interfaces;
+using FightTracker.Infrastructure.Data;
+using FightTracker.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +16,7 @@ namespace FightTracker.Infrastructure
     {
         public static IServiceCollection AddInfrastructureDI(this IServiceCollection services, IConfiguration configuration)
         {
+            services.AddScoped<IFighterRepository, FighterRepository>();
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("AppConnectionString")));
             return services; 

@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FightTracker.Core.Entities
+namespace FightTracker.Contracts.DTOs
 {
-    public class Fighter
+    public class UpdateFighterDto
     {
-        public int Id { get; set; }
         public string FullName { get; set; } = null!;
         public string? NickName { get; set; }
         public string WeightClass { get; set; } = null!;
@@ -16,10 +15,5 @@ namespace FightTracker.Core.Entities
         public int Wins { get; set; }
         public int Losses { get; set; }
         public int Draws { get; set; }
-
-        public List<Fight> FightsAsFighterA { get; set; } = new ();
-        public List<Fight> FightsAsFighterB { get; set; } = new();
-
-
     }
 }

@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.5.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FightTracker.Contracts\FightTracker.Contracts.csproj" />
     <ProjectReference Include="..\FightTracker.Core\FightTracker.Core.csproj" />
   </ItemGroup>
 
