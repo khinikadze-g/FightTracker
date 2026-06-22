@@ -39,7 +39,7 @@ namespace FightTracker.Api.Controllers
             }
             return Ok(result);
         }
-        [HttpPut("employees/{Id}")]
+        [HttpPut("fighters/{Id}")]
         public async Task<IActionResult> UpdateFighterAsync([FromRoute]int Id, [FromBody]UpdateFighterDto updateFighterDto)
         {
             var result = await mediator.Send(new UpdateFighterCommand(Id, updateFighterDto));

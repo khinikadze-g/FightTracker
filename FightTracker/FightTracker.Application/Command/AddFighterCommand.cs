@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace FightTracker.Application.Command
 {
-    public record AddFighterCommand(Contracts.DTOs.AddFighterDto FighterDto) : IRequest<FighterResponseDto>;
+    public record AddFighterCommand(AddFighterDto FighterDto) : IRequest<FighterResponseDto>;
 
 
     public class AddFighterCommandHandler(IFighterRepository fighterRepository) : IRequestHandler<AddFighterCommand, FighterResponseDto>

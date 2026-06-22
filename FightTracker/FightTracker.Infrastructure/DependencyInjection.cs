@@ -17,6 +17,7 @@ namespace FightTracker.Infrastructure
         public static IServiceCollection AddInfrastructureDI(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddScoped<IFighterRepository, FighterRepository>();
+            services.AddScoped<IFightRepository, FightRepository>();
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("AppConnectionString")));
             return services; 

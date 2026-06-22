@@ -13,18 +13,27 @@ namespace FightTracker.Core.Entities
         public int EventId { get; set; }
         public Event Event { get; set; } = null!;
 
+        public FightStatus Status { get; set; } = FightStatus.Scheduled;
+
         public int FighterAId { get; set; }
         public Fighter FighterA { get; set; } = null!;
 
         public int FighterBId { get;set; }
         public Fighter FighterB { get; set; } = null!;
         
-        public int WinnerId { get; set; }
+        public int? WinnerId { get; set; }
         public Fighter Winner { get; set;} = null!;
 
-        public string Method { get; set; } = null!;
+        public string? Method { get; set; }
         public int? Round { get; set; }
         public string? Time { get; set; }
 
+    }
+
+    public enum FightStatus
+    {
+        Scheduled = 1,
+        Completed = 2,
+        Cancelled = 3
     }
 }
