@@ -1,5 +1,5 @@
-﻿using FightTracker.Application.Command;
-using FightTracker.Application.Query;
+﻿using FightTracker.Application.Fighters.Command;
+using FightTracker.Application.Fighters.Query;
 using FightTracker.Contracts.DTOs;
 using MediatR;
 using Microsoft.AspNetCore.Http;

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FightTracker.Application.Command
+namespace FightTracker.Application.Fights.Command
 {
     public record AddFightCommand(AddFightDto AddFightDto) : IRequest<FightResponseDto>;
 

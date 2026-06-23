@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-namespace FightTracker.Application.Command
+namespace FightTracker.Application.Fighters.Command
 {
     public record AddFighterCommand(AddFighterDto FighterDto) : IRequest<FighterResponseDto>;
 

@@ -18,6 +18,7 @@ namespace FightTracker.Infrastructure
         {
             services.AddScoped<IFighterRepository, FighterRepository>();
             services.AddScoped<IFightRepository, FightRepository>();
+            services.AddScoped<IEventRepository, EventRepository>();
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("AppConnectionString")));
             return services; 

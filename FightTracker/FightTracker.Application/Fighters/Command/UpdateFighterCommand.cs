@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FightTracker.Application.Command
+namespace FightTracker.Application.Fighters.Command
 {
     public record UpdateFighterCommand(int Id, UpdateFighterDto UpdateFighterDto) : IRequest<FighterResponseDto?>;
 

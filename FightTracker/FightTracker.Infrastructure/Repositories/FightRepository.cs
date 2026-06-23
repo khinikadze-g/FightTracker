@@ -41,11 +41,15 @@ namespace FightTracker.Infrastructure.Repositories
             return await dbContext.Fights.ToListAsync();
         }
 
-        public Task<Fight?> GetByIdAsync(int id)
+        public async Task<List<Fight>> GetByIdsAsync(IEnumerable<int> Id)
         {
-            return dbContext.Fights.FirstOrDefaultAsync(f => f.Id == id);
+            return await dbContext.Fights.Where(f => Id.Contains(f.Id)).ToListAsync();
         }
 
+        public async Task<Fight?> GetByIdAsync(int id)
+        {
+            return await dbContext.Fights.FirstOrDefaultAsync(x => x.Id == id);
+        }
         public async Task<Fight?> UpdateFightAsync(int id, Fight fight)
         {
             var existingFight = await dbContext.Fights.FirstOrDefaultAsync(f => f.Id == id);

@@ -11,7 +11,7 @@ namespace FightTracker.Core.Interfaces
     {
         Task<Fighter> AddFighterAsync(Fighter fighter);
         Task<List<Fighter>> GetAllAsync();
-        Task<Fighter?> GetByIdAsync(int Id);
+        Task<Fighter> GetByIdAsync(int Id);
         Task<Fighter?> UpdateAsync(int Id, Fighter fighter);
         Task<Fighter?> RemoveFighterAsync(int Id);
     }

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FightTracker.Application.Query
+namespace FightTracker.Application.Fights.Query
 {
     public record GetAllFightsQuery() : IRequest<List<FightResponseDto>>;
 

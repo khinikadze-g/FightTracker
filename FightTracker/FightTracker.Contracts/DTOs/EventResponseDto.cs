@@ -4,23 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FightTracker.Core.Entities
+namespace FightTracker.Contracts.DTOs
 {
-    public class Event
+    public class EventResponseDto
     {
         public int Id { get; set; }
         public string Name { get; set; } = null!;
-        public EventStatus eventStatus { get; set; } = EventStatus.Scheduled;
+        public string eventStatus { get; set; } = null!;
         public DateTime Date { get; set; }
         public string Location { get; set; } = null!;
-        public List<Fight> Fights { get; set; } = new();
-       
-    }
-
-    public enum EventStatus
-    {
-        Scheduled = 1,
-        Completed = 2,
-        Cancelled = 3
+        public List<int> FightIds  { get; set; } = new();
     }
 }

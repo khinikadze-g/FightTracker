@@ -7,23 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FightTracker.Application.Command
+namespace FightTracker.Application.Fights.Query
 {
-    public record DeleteFightByIdCommand(int  id) : IRequest<FightResponseDto?>;
+    public record GetFightByIdQuery(int Id) : IRequest<FightResponseDto?>;
 
 
-    public class DeleteFightByIdHandler(IFightRepository fightRepository) : IRequestHandler<DeleteFightByIdCommand, FightResponseDto?>
+    public class GetFightByIdQueryHandler(IFightRepository fightRepository) : IRequestHandler<GetFightByIdQuery, FightResponseDto?>
     {
-        public async Task<FightResponseDto?> Handle(DeleteFightByIdCommand request, CancellationToken cancellationToken)
+        public async Task<FightResponseDto?> Handle(GetFightByIdQuery request, CancellationToken cancellationToken)
         {
-            var fight = await fightRepository.DeleteByIdAsync(request.id);
+            var fight = await fightRepository.GetByIdAsync(request.Id);
             if (fight == null)
             {
                 return null;
             }
             return new FightResponseDto
             {
-
                 Id = fight.Id,
                 EventId = fight.EventId,
                 Status = fight.Status.ToString(),

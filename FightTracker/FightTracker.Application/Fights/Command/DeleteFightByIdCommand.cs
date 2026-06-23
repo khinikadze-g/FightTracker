@@ -1,5 +1,4 @@
 ﻿using FightTracker.Contracts.DTOs;
-using FightTracker.Core.Entities;
 using FightTracker.Core.Interfaces;
 using MediatR;
 using System;
@@ -8,28 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FightTracker.Application.Command
+namespace FightTracker.Application.Fights.Command
 {
-    public record CancelFightCommand(int Id) : IRequest<FightResponseDto>;
+    public record DeleteFightByIdCommand(int  id) : IRequest<FightResponseDto?>;
 
 
-    public class CancelFightCommandHandler(IFightRepository fightRepository) : IRequestHandler<CancelFightCommand, FightResponseDto?>
+    public class DeleteFightByIdHandler(IFightRepository fightRepository) : IRequestHandler<DeleteFightByIdCommand, FightResponseDto?>
     {
-        public async Task<FightResponseDto?> Handle(CancelFightCommand request, CancellationToken cancellationToken)
+        public async Task<FightResponseDto?> Handle(DeleteFightByIdCommand request, CancellationToken cancellationToken)
         {
-            var fight = await fightRepository.GetByIdAsync(request.Id);
+            var fight = await fightRepository.DeleteByIdAsync(request.id);
             if (fight == null)
             {
                 return null;
             }
-            if (fight.Status != FightStatus.Scheduled)
-            {
-                return null;
-            }
-            fight.Status = FightStatus.Cancelled;
-            await fightRepository.UpdateFightAsync(request.Id, fight);
             return new FightResponseDto
             {
+
                 Id = fight.Id,
                 EventId = fight.EventId,
                 Status = fight.Status.ToString(),
