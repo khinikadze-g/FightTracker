@@ -1,10 +1,13 @@
 ﻿using FightTracker.Application.Events.Command;
+using FightTracker.Application.Events.EventsValidation;
 using FightTracker.Application.Events.Query;
 using FightTracker.Contracts.DTOs;
 using MediatR;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
+using FluentValidation;
 
 namespace FightTracker.Api.Controllers
 {
@@ -21,14 +24,14 @@ namespace FightTracker.Api.Controllers
 
         [HttpPost]
         public async Task<IActionResult> AddEventAsync([FromBody] AddEventRequestDto addEventRequestDto)
-        {
-            var result = await mediator.Send(new AddEventCommand(addEventRequestDto));
+        { 
+            var result = await mediator.Send(new AddEventCommand(addEventRequestDto.Name, addEventRequestDto.Date, addEventRequestDto.Location));
             return Ok(result);
         }
         [HttpPut("events/{Id}")]
         public async Task<IActionResult> UpdateEventAsync([FromRoute] int Id, [FromBody] UpdateEventDto updateEventDto)
         {
-            var result = await mediator.Send(new UpdateEventCommand(Id, updateEventDto));
+            var result = await mediator.Send(new UpdateEventCommand(Id, updateEventDto.Name, updateEventDto.Date, updateEventDto.Location));
             if (result == null)
             {
                 return NotFound();

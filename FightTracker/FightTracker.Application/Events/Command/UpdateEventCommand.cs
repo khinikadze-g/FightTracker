@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 
 namespace FightTracker.Application.Events.Command
 {
-    public record UpdateEventCommand(int Id, UpdateEventDto UpdateEventDto) : IRequest<EventResponseDto?>;
+    public record UpdateEventCommand(
+        int Id, string Name, DateTime Date, string Location
+        ) : IRequest<EventResponseDto?>;
 
     public class UpdateEventCommandHandler(IEventRepository eventRepository) : IRequestHandler<UpdateEventCommand, EventResponseDto?>
     {
@@ -24,9 +26,9 @@ namespace FightTracker.Application.Events.Command
             {
                 return null;
             }
-            existingEvent.Name = request.UpdateEventDto.Name;
-            existingEvent.Date = request.UpdateEventDto.Date;
-            existingEvent.Location = request.UpdateEventDto.Location;
+            existingEvent.Name = request.Name;
+            existingEvent.Date = request.Date;
+            existingEvent.Location = request.Location;
 
             var updatedEvent = await eventRepository.UpdateEventAsync(request.Id, existingEvent);
 

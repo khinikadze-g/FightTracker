@@ -11,7 +11,7 @@ using System.Transactions;
 
 namespace FightTracker.Application.Fights.Command
 {
-    public record UpdateFightResultCommand(int Id, UpdateFightResultDto UpdateFightResultDto) : IRequest<FightResponseDto?>;
+    public record UpdateFightResultCommand(int Id, int? WinnerId, string? Method, int? Round, string? Time) : IRequest<FightResponseDto?>;
 
 
     public class UpdateFightResultCommandHandler(IFightRepository fightRepository) : IRequestHandler<UpdateFightResultCommand, FightResponseDto?>
@@ -27,10 +27,10 @@ namespace FightTracker.Application.Fights.Command
             {
                 return null;
             }
-            existingFight.WinnerId = request.UpdateFightResultDto.WinnerId;
-            existingFight.Method = request.UpdateFightResultDto.Method;
-            existingFight.Round = request.UpdateFightResultDto.Round;
-            existingFight.Time = request.UpdateFightResultDto.Time;
+            existingFight.WinnerId = request.WinnerId;
+            existingFight.Method = request.Method;
+            existingFight.Round = request.Round;
+            existingFight.Time = request.Time;
 
             var updatedFight = await fightRepository.UpdateFightAsync(request.Id, existingFight);
             if (updatedFight == null)

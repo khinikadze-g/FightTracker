@@ -1,5 +1,7 @@
 
 using FightTracker.Infrastructure;
+using FightTracker.Application;
+using FightTracker.Api;
 
 var builder = WebApplication.CreateBuilder(args);
 

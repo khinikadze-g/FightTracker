@@ -9,7 +9,14 @@ using System.Text;
 using System.Threading.Tasks;
 namespace FightTracker.Application.Fighters.Command
 {
-    public record AddFighterCommand(AddFighterDto FighterDto) : IRequest<FighterResponseDto>;
+    public record AddFighterCommand( 
+    string FullName,
+    string? NickName,
+    string WeightClass,
+    string Country,
+    int Wins,
+    int Losses,
+    int Draws) : IRequest<FighterResponseDto>;
 
 
     public class AddFighterCommandHandler(IFighterRepository fighterRepository) : IRequestHandler<AddFighterCommand, FighterResponseDto>
@@ -17,13 +24,13 @@ namespace FightTracker.Application.Fighters.Command
         public async Task<FighterResponseDto> Handle(AddFighterCommand request, CancellationToken cancellationToken)
         {
             var fighter = new Fighter { 
-                FullName = request.FighterDto.FullName,
-                NickName = request.FighterDto.NickName,
-                Country = request.FighterDto.Country,
-                WeightClass = request.FighterDto.WeightClass,
-                Wins = request.FighterDto.Wins,
-                Losses = request.FighterDto.Losses,
-                Draws = request.FighterDto.Draws
+                FullName = request.FullName,
+                NickName = request.NickName,
+                Country = request.Country,
+                WeightClass = request.WeightClass,
+                Wins = request.Wins,
+                Losses = request.Losses,
+                Draws = request.Draws
                 };
             var createdFighter = await fighterRepository.AddFighterAsync(fighter);
             return new FighterResponseDto

@@ -10,7 +10,10 @@ using System.Threading.Tasks;
 
 namespace FightTracker.Application.Events.Command
 {
-    public record AddEventCommand(AddEventRequestDto AddEventRequestDto) : IRequest<EventResponseDto>;
+    public record AddEventCommand(
+    string Name,
+    DateTime Date,
+    string Location) : IRequest<EventResponseDto>;
 
 
     public class AddEventCommandHandler(IEventRepository eventRepository) : IRequestHandler<AddEventCommand, EventResponseDto>
@@ -19,9 +22,9 @@ namespace FightTracker.Application.Events.Command
         {
             var eventEntity = new Event
             {
-                Name = request.AddEventRequestDto.Name,
-                Date = request.AddEventRequestDto.Date,
-                Location = request.AddEventRequestDto.Location,
+                Name = request.Name,
+                Date = request.Date,
+                Location = request.Location,
             };
             await eventRepository.AddEventAsync(eventEntity);
             return new EventResponseDto

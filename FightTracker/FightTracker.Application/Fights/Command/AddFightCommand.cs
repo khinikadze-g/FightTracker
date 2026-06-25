@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace FightTracker.Application.Fights.Command
 {
-    public record AddFightCommand(AddFightDto AddFightDto) : IRequest<FightResponseDto>;
+    public record AddFightCommand(int EventId, int FighterAId, int FighterBId) : IRequest<FightResponseDto>;
 
 
     public class AddFightCommandHandler(IFightRepository fightRepository) : IRequestHandler<AddFightCommand, FightResponseDto>
@@ -19,9 +19,9 @@ namespace FightTracker.Application.Fights.Command
         {
             var fight = new Fight
             {
-                EventId = request.AddFightDto.EventId,
-                FighterAId = request.AddFightDto.FighterAId,
-                FighterBId = request.AddFightDto.FighterBId
+                EventId = request.EventId,
+                FighterAId = request.FighterAId,
+                FighterBId = request.FighterBId
             };
             await fightRepository.AddFightAsync(fight);
             return new FightResponseDto

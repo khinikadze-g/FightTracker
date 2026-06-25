@@ -18,9 +18,10 @@ namespace FightTracker.Api.Controllers
             this.mediator = mediator;
         }
         [HttpPost]
-        public async Task<IActionResult> AddFighterAsync(AddFighterDto addFighterDto)
+        public async Task<IActionResult> AddFighterAsync(AddFighterDto dto)
         {
-            var result = await mediator.Send(new AddFighterCommand(addFighterDto));
+            var result = await mediator.Send(new AddFighterCommand(dto.FullName, dto.NickName, dto.WeightClass, dto.Country,
+                dto.Wins, dto.Losses, dto.Draws));
             return Ok(result);
         }
         [HttpGet("fighters")]
@@ -40,9 +41,10 @@ namespace FightTracker.Api.Controllers
             return Ok(result);
         }
         [HttpPut("fighters/{Id}")]
-        public async Task<IActionResult> UpdateFighterAsync([FromRoute]int Id, [FromBody]UpdateFighterDto updateFighterDto)
+        public async Task<IActionResult> UpdateFighterAsync([FromRoute]int Id, [FromBody]UpdateFighterDto dto)
         {
-            var result = await mediator.Send(new UpdateFighterCommand(Id, updateFighterDto));
+            var result = await mediator.Send(new UpdateFighterCommand(Id, dto.FullName, dto.NickName, dto.WeightClass, dto.Country,
+                dto.Wins, dto.Losses, dto.Draws));
             if(result == null)
             {
                 return NotFound();

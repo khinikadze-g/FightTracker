@@ -22,7 +22,7 @@ namespace FightTracker.Core.Entities
         public Fighter FighterB { get; set; } = null!;
         
         public int? WinnerId { get; set; }
-        public Fighter Winner { get; set;} = null!;
+        public Fighter? Winner { get; set;}
 
         public string? Method { get; set; }
         public int? Round { get; set; }

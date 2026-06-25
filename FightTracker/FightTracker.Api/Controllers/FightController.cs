@@ -18,9 +18,9 @@ namespace FightTracker.Api.Controllers
             this.mediator = mediator;
         }
         [HttpPut("fight/{Id}")]
-        public async Task<IActionResult> UpdateFightAsync([FromRoute]int Id, [FromBody]UpdateFightDto updateFightDto)
+        public async Task<IActionResult> UpdateFightAsync([FromRoute]int Id, [FromBody]UpdateFightDto dto)
         {
-            var result = await mediator.Send(new UpdateFightCommand(Id, updateFightDto));
+            var result = await mediator.Send(new UpdateFightCommand(Id, dto.FighterAId, dto.FighterBId));
             if(result == null)
             {
                 return NotFound();
@@ -29,9 +29,9 @@ namespace FightTracker.Api.Controllers
         }
 
         [HttpPut("fightresult/{Id}")]
-        public async Task<IActionResult> UpdateFightResultAsync([FromRoute] int Id, [FromBody] UpdateFightResultDto updateFightResultDto)
+        public async Task<IActionResult> UpdateFightResultAsync([FromRoute] int Id, [FromBody] UpdateFightResultDto dto)
         {
-            var result = await mediator.Send(new UpdateFightResultCommand(Id, updateFightResultDto));
+            var result = await mediator.Send(new UpdateFightResultCommand(Id, dto.WinnerId, dto.Method, dto.Round, dto.Time));
             if (result == null)
             {
                 return NotFound();
@@ -55,9 +55,9 @@ namespace FightTracker.Api.Controllers
             return Ok(result);
         }
         [HttpPost]
-        public async Task<IActionResult> AddFightAsync([FromBody] AddFightDto addFightDto)
+        public async Task<IActionResult> AddFightAsync([FromBody] AddFightDto dto)
         {
-            var result = await mediator.Send(new AddFightCommand(addFightDto));
+            var result = await mediator.Send(new AddFightCommand(dto.EventId, dto.FighterAId, dto.FighterBId));
             return Ok(result);
         }
         [HttpDelete("fights/{Id}")]
