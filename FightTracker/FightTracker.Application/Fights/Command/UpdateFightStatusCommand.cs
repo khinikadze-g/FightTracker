@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace FightTracker.Application.Fights.Command
 {
-    public record CancelFightCommand(int Id) : IRequest<FightResponseDto>;
+    public record UpdateFightStatusCommand(int Id, string FightStatus) : IRequest<FightResponseDto>;
 
 
-    public class CancelFightCommandHandler(IFightRepository fightRepository) : IRequestHandler<CancelFightCommand, FightResponseDto?>
+    public class UpdateFightStatusCommandHandler(IFightRepository fightRepository) : IRequestHandler<UpdateFightStatusCommand, FightResponseDto?>
     {
-        public async Task<FightResponseDto?> Handle(CancelFightCommand request, CancellationToken cancellationToken)
+        public async Task<FightResponseDto?> Handle(UpdateFightStatusCommand request, CancellationToken cancellationToken)
         {
             var fight = await fightRepository.GetByIdAsync(request.Id);
             if (fight == null)
@@ -26,7 +26,9 @@ namespace FightTracker.Application.Fights.Command
             {
                 return null;
             }
-            fight.Status = FightStatus.Cancelled;
+            var statusEnum = (FightStatus)Enum.Parse(typeof(FightStatus), request.FightStatus);
+            fight.Status = statusEnum;
+
             await fightRepository.UpdateFightAsync(request.Id, fight);
             return new FightResponseDto
             {

@@ -74,11 +74,11 @@ namespace FightTracker.Api.Controllers
             }
             return Ok(result);
         }
-        [HttpPut("{Id}/cancel")]
+        [HttpPut("{Id}/status")]
         [Authorize]
-        public async Task<IActionResult> CancelFight([FromRoute] int Id)
+        public async Task<IActionResult> UpdateStatus([FromRoute] int Id, [FromBody] UpdateFightStatusDto dto)
         {
-            var result = await mediator.Send(new CancelFightCommand(Id));
+            var result = await mediator.Send(new UpdateFightStatusCommand(Id, dto.FightStatus));
             if (result == null)
             {
                 return NotFound();
