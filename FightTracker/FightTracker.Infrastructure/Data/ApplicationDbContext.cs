@@ -17,6 +17,7 @@ namespace FightTracker.Infrastructure.Data
         public DbSet<Event> Events { get; set; }
         public DbSet<Fight> Fights { get; set; }
         public DbSet<Fighter> Fighters { get; set; }
+        public DbSet<User> Users { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

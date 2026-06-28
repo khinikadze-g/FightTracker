@@ -2,6 +2,7 @@
 using FightTracker.Application.Fights.Query;
 using FightTracker.Contracts.DTOs;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +19,7 @@ namespace FightTracker.Api.Controllers
             this.mediator = mediator;
         }
         [HttpPut("fight/{Id}")]
+        [Authorize]
         public async Task<IActionResult> UpdateFightAsync([FromRoute]int Id, [FromBody]UpdateFightDto dto)
         {
             var result = await mediator.Send(new UpdateFightCommand(Id, dto.FighterAId, dto.FighterBId));
@@ -29,6 +31,7 @@ namespace FightTracker.Api.Controllers
         }
 
         [HttpPut("fightresult/{Id}")]
+        [Authorize]
         public async Task<IActionResult> UpdateFightResultAsync([FromRoute] int Id, [FromBody] UpdateFightResultDto dto)
         {
             var result = await mediator.Send(new UpdateFightResultCommand(Id, dto.WinnerId, dto.Method, dto.Round, dto.Time));
@@ -55,6 +58,7 @@ namespace FightTracker.Api.Controllers
             return Ok(result);
         }
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddFightAsync([FromBody] AddFightDto dto)
         {
             var result = await mediator.Send(new AddFightCommand(dto.EventId, dto.FighterAId, dto.FighterBId));
@@ -71,6 +75,7 @@ namespace FightTracker.Api.Controllers
             return Ok(result);
         }
         [HttpPut("{Id}/cancel")]
+        [Authorize]
         public async Task<IActionResult> CancelFight([FromRoute] int Id)
         {
             var result = await mediator.Send(new CancelFightCommand(Id));

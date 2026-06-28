@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using FluentValidation;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FightTracker.Api.Controllers
 {
@@ -23,12 +24,14 @@ namespace FightTracker.Api.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddEventAsync([FromBody] AddEventRequestDto addEventRequestDto)
         { 
             var result = await mediator.Send(new AddEventCommand(addEventRequestDto.Name, addEventRequestDto.Date, addEventRequestDto.Location));
             return Ok(result);
         }
         [HttpPut("events/{Id}")]
+        [Authorize]
         public async Task<IActionResult> UpdateEventAsync([FromRoute] int Id, [FromBody] UpdateEventDto updateEventDto)
         {
             var result = await mediator.Send(new UpdateEventCommand(Id, updateEventDto.Name, updateEventDto.Date, updateEventDto.Location));
@@ -56,6 +59,7 @@ namespace FightTracker.Api.Controllers
             return Ok(result);
         }
         [HttpDelete("events/{Id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteByIdAsync([FromRoute] int Id)
         {
             var result = await mediator.Send(new DeleteEventCommand(Id));
@@ -66,6 +70,7 @@ namespace FightTracker.Api.Controllers
             return Ok(result);
         }
         [HttpPut("events/{Id}/status")]
+        [Authorize]
         public async Task<IActionResult> UpdateEventStatusAsync([FromRoute] int Id, [FromBody]UpdateEventStatusDto updateEventStatusDto)
         {
             var result = await mediator.Send(new UpdateEventStatusCommand(Id, updateEventStatusDto));

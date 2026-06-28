@@ -1,4 +1,6 @@
-﻿using FightTracker.Core.Interfaces;
+﻿using FightTracker.Application.UserServices.cs;
+using FightTracker.Core.Interfaces;
+using FightTracker.Infrastructure.Auth;
 using FightTracker.Infrastructure.Data;
 using FightTracker.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -19,6 +21,12 @@ namespace FightTracker.Infrastructure
             services.AddScoped<IFighterRepository, FighterRepository>();
             services.AddScoped<IFightRepository, FightRepository>();
             services.AddScoped<IEventRepository, EventRepository>();
+
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<ITokenGenerator, TokenGenerator>();
+            services.AddScoped<IPasswordHasher, PasswordHasher>();
+
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("AppConnectionString")));
             return services; 

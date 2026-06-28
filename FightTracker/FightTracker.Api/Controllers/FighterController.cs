@@ -2,6 +2,7 @@
 using FightTracker.Application.Fighters.Query;
 using FightTracker.Contracts.DTOs;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,6 +19,7 @@ namespace FightTracker.Api.Controllers
             this.mediator = mediator;
         }
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> AddFighterAsync(AddFighterDto dto)
         {
             var result = await mediator.Send(new AddFighterCommand(dto.FullName, dto.NickName, dto.WeightClass, dto.Country,
@@ -41,6 +43,7 @@ namespace FightTracker.Api.Controllers
             return Ok(result);
         }
         [HttpPut("fighters/{Id}")]
+        [Authorize]
         public async Task<IActionResult> UpdateFighterAsync([FromRoute]int Id, [FromBody]UpdateFighterDto dto)
         {
             var result = await mediator.Send(new UpdateFighterCommand(Id, dto.FullName, dto.NickName, dto.WeightClass, dto.Country,
@@ -52,6 +55,7 @@ namespace FightTracker.Api.Controllers
             return Ok(result);
         }
         [HttpDelete("fighters/{Id}")]
+        [Authorize]
         public async Task<IActionResult> DeleteByIdAsync([FromRoute] int Id)
         {
             var result = await mediator.Send(new DeleteFighterByIdCommand(Id));
