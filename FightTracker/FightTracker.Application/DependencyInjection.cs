@@ -7,9 +7,9 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using FightTracker.Application.Events.EventsValidation;
 using FightTracker.Application.Fighters.FightersValidation;
 using FightTracker.Application.Fights.FightsValidation;
+using FightTracker.Application.Behaviors;
 
 namespace FightTracker.Application
 {
@@ -19,9 +19,8 @@ namespace FightTracker.Application
         {
             services.AddMediatR( cfg =>
                 {cfg.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
-                 cfg.AddOpenBehavior(typeof(EventValidationBehaviour<,>));
-                 cfg.AddOpenBehavior(typeof(FighterValidationBehaviour<,>));
-                 cfg.AddOpenBehavior(typeof(FightValidationBehaviour<,>));
+                 cfg.AddOpenBehavior(typeof(ValidationBehavior<,>));
+                 cfg.AddOpenBehavior(typeof(CachingBehavior<,>));
                 });
 
             services.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly);

@@ -1,4 +1,5 @@
-﻿using FightTracker.Contracts.DTOs;
+﻿using FightTracker.Application.CachingServices;
+using FightTracker.Contracts.DTOs;
 using FightTracker.Core.Interfaces;
 using MediatR;
 using System;
@@ -9,7 +10,11 @@ using System.Threading.Tasks;
 
 namespace FightTracker.Application.Events.Query
 {
-    public class GetAllEventsQuery() : IRequest<List<EventResponseDto>>;
+    public class GetAllEventsQuery() : IRequest<List<EventResponseDto>>, ICacheable
+    {
+        public string Key => "events";
+        public TimeSpan Expiration => TimeSpan.FromSeconds(20);
+    }
 
 
 

@@ -1,4 +1,5 @@
-﻿using FightTracker.Contracts.DTOs;
+﻿using FightTracker.Application.CachingServices;
+using FightTracker.Contracts.DTOs;
 using FightTracker.Core.Interfaces;
 using MediatR;
 using System;
@@ -13,7 +14,7 @@ namespace FightTracker.Application.Events.Command
         int Id, string Name, DateTime Date, string Location
         ) : IRequest<EventResponseDto?>;
 
-    public class UpdateEventCommandHandler(IEventRepository eventRepository) : IRequestHandler<UpdateEventCommand, EventResponseDto?>
+    public class UpdateEventCommandHandler(IEventRepository eventRepository, ICachingService cachingService) : IRequestHandler<UpdateEventCommand, EventResponseDto?>
     {
         public async Task<EventResponseDto?> Handle(UpdateEventCommand request, CancellationToken cancellationToken)
         {
@@ -36,6 +37,7 @@ namespace FightTracker.Application.Events.Command
             {
                 return null;
             }
+            await cachingService.DeleteAsync("events");
             return new EventResponseDto
             {
                 Id = updatedEvent.Id,

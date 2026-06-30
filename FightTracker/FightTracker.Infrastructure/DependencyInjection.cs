@@ -1,6 +1,8 @@
-﻿using FightTracker.Application.UserServices.cs;
+﻿using FightTracker.Application.CachingServices;
+using FightTracker.Application.UserServices.cs;
 using FightTracker.Core.Interfaces;
 using FightTracker.Infrastructure.Auth;
+using FightTracker.Infrastructure.Cacheservices;
 using FightTracker.Infrastructure.Data;
 using FightTracker.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -26,6 +28,9 @@ namespace FightTracker.Infrastructure
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ITokenGenerator, TokenGenerator>();
             services.AddScoped<IPasswordHasher, PasswordHasher>();
+
+            services.AddMemoryCache();
+            services.AddScoped<ICachingService, CachingService>();
 
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("AppConnectionString")));

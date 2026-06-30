@@ -1,4 +1,5 @@
-﻿using FightTracker.Contracts.DTOs;
+﻿using FightTracker.Application.CachingServices;
+using FightTracker.Contracts.DTOs;
 using FightTracker.Core.Interfaces;
 using MediatR;
 using System;
@@ -9,7 +10,12 @@ using System.Threading.Tasks;
 
 namespace FightTracker.Application.Fighters.Query
 {
-    public record GetAllFightersQuery() : IRequest<List<FighterResponseDto>>;
+    public record GetAllFightersQuery() : IRequest<List<FighterResponseDto>>, ICacheable
+    {
+        public string Key => "fighters";
+        public TimeSpan Expiration => TimeSpan.FromSeconds(30);
+
+    }
 
     public class GetAllFightersQueryHandler(IFighterRepository fighterRepository) : IRequestHandler<GetAllFightersQuery, List<FighterResponseDto>>
     {

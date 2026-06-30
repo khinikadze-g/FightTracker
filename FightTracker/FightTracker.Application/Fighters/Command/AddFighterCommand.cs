@@ -1,4 +1,5 @@
-﻿using FightTracker.Contracts.DTOs;
+﻿using FightTracker.Application.CachingServices;
+using FightTracker.Contracts.DTOs;
 using FightTracker.Core.Entities;
 using FightTracker.Core.Interfaces;
 using MediatR;
@@ -19,7 +20,7 @@ namespace FightTracker.Application.Fighters.Command
     int Draws) : IRequest<FighterResponseDto>;
 
 
-    public class AddFighterCommandHandler(IFighterRepository fighterRepository) : IRequestHandler<AddFighterCommand, FighterResponseDto>
+    public class AddFighterCommandHandler(IFighterRepository fighterRepository, ICachingService cachingService) : IRequestHandler<AddFighterCommand, FighterResponseDto>
     {
         public async Task<FighterResponseDto> Handle(AddFighterCommand request, CancellationToken cancellationToken)
         {
@@ -33,6 +34,7 @@ namespace FightTracker.Application.Fighters.Command
                 Draws = request.Draws
                 };
             var createdFighter = await fighterRepository.AddFighterAsync(fighter);
+            await cachingService.DeleteAsync("fighters");
             return new FighterResponseDto
             {
                 Id = createdFighter.Id,

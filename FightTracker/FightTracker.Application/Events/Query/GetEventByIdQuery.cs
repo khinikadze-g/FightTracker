@@ -1,4 +1,5 @@
-﻿using FightTracker.Contracts.DTOs;
+﻿using FightTracker.Application.CachingServices;
+using FightTracker.Contracts.DTOs;
 using FightTracker.Core.Interfaces;
 using MediatR;
 using System;
@@ -10,7 +11,11 @@ using System.Xml.Linq;
 
 namespace FightTracker.Application.Events.Query
 {
-    public record GetEventByIdQuery(int id) : IRequest<EventResponseDto?>;
+    public record GetEventByIdQuery(int id) : IRequest<EventResponseDto?>, ICacheable
+    {
+        public string Key => $"events:{id}";
+        public TimeSpan Expiration => TimeSpan.FromSeconds(20);
+    }
 
 
     public class GetEventByIdQueryHandler(IEventRepository eventRepository) : IRequestHandler<GetEventByIdQuery, EventResponseDto?>
