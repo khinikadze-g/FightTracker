@@ -21,10 +21,10 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: restore
-        run: dotnet restore --configuration Release
-
+        run: dotnet restore FightTracker/FightTracker.sln
+      
       - name: build with dotnet
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build FightTracker/FightTracker.sln --configuration Release --no-restore
 
       #- name: dotnet test
       #  run: dotnet test --configuration Release --no-build
