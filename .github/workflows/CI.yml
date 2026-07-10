@@ -1,0 +1,39 @@
+name: CI
+on: 
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: PR Verify
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: restore
+        run: dotnet restore --configuration Release
+
+      - name: build with dotnet
+        run: dotnet build --configuration Release --no-restore
+
+      #- name: dotnet test
+      #  run: dotnet test --configuration Release --no-build
+
+      - name: publish
+        run: dotnet publish FightTracker/FightTracker.Api/FightTracker.Api.csproj --configuration Release -o artifacts --no-build
+
+      - name: upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifact
+          path: artifacts  
