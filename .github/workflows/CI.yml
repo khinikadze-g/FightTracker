@@ -30,7 +30,7 @@ jobs:
       #  run: dotnet test --configuration Release --no-build
 
       - name: publish
-        run: dotnet publish FightTracker/FightTracker.Api/FightTracker.Api.csproj --configuration Release -o artifacts --no-build
+        run: dotnet publish FightTracker/src/FightTracker.Api/FightTracker.Api.csproj --configuration Release -o artifacts --no-build
 
       - name: upload artifacts
         uses: actions/upload-artifact@v4
