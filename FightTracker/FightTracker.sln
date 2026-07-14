@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FightTracker.Core", "src\Fi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FightTracker.Infrastructure", "src\FightTracker.Infrastructure\FightTracker.Infrastructure.csproj", "{FAF65B90-20F3-26DF-92C6-57192D54AC6C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FightTracker.Application.Tests.Unit", "tests\FightTracker.Application.Tests\FightTracker.Application.Tests.Unit.csproj", "{7AC91EE3-93D7-4C0B-90AC-4B75478A4EA1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{FAF65B90-20F3-26DF-92C6-57192D54AC6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAF65B90-20F3-26DF-92C6-57192D54AC6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAF65B90-20F3-26DF-92C6-57192D54AC6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7AC91EE3-93D7-4C0B-90AC-4B75478A4EA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7AC91EE3-93D7-4C0B-90AC-4B75478A4EA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7AC91EE3-93D7-4C0B-90AC-4B75478A4EA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7AC91EE3-93D7-4C0B-90AC-4B75478A4EA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +59,7 @@ Global
 		{73B48DB5-DB9C-978C-3EBA-FD8ED1B469E7} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{43F582CE-4B89-AD05-317A-27185F3B47D3} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{FAF65B90-20F3-26DF-92C6-57192D54AC6C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{7AC91EE3-93D7-4C0B-90AC-4B75478A4EA1} = {DD8A5078-0D9F-4D9E-AF47-50361C6E44E6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {15CD893A-560D-43FB-A45C-28F155E43671}
