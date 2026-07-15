@@ -26,8 +26,8 @@ jobs:
       - name: build with dotnet
         run: dotnet build FightTracker/FightTracker.sln --configuration Release --no-restore
 
-      #- name: dotnet test
-      #  run: dotnet test --configuration Release --no-build
+      - name: dotnet test
+        run: dotnet test --configuration Release --no-build
 
       - name: publish
         run: dotnet publish FightTracker/src/FightTracker.Api/FightTracker.Api.csproj --configuration Release -o artifacts --no-build

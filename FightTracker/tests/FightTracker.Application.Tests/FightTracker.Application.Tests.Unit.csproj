@@ -30,11 +30,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\EventCommandTests\" />
-    <Folder Include="Commands\FightCommandTests\" />
     <Folder Include="Queries\FighterQueryTests\" />
     <Folder Include="Queries\FightQueryTests\" />
-    <Folder Include="Queries\EventQueryTests\" />
   </ItemGroup>
 
 </Project>

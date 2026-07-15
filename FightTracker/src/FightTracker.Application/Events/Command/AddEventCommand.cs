@@ -27,15 +27,15 @@ namespace FightTracker.Application.Events.Command
                 Date = request.Date,
                 Location = request.Location,
             };
-            await eventRepository.AddEventAsync(eventEntity);
+            var addedEvent = await eventRepository.AddEventAsync(eventEntity);
             await cachingService.DeleteAsync("events");
             return new EventResponseDto
             {
-                Id = eventEntity.Id,
-                Name = eventEntity.Name,
-                eventStatus = eventEntity.eventStatus.ToString(),
-                Date = eventEntity.Date,
-                Location = eventEntity.Location,
+                Id = addedEvent.Id,
+                Name = addedEvent.Name,
+                eventStatus = addedEvent.eventStatus.ToString(),
+                Date = addedEvent.Date,
+                Location = addedEvent.Location,
                 FightIds = new List<int>()
             };
         }

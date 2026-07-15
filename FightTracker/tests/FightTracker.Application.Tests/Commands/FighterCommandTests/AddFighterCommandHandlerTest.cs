@@ -13,21 +13,21 @@ using System.Threading.Tasks;
 
 namespace FightTracker.Application.Tests.Commands.FighterCommandTests
 {
-    public class AddFighterCommandTest
+    public class AddFighterCommandHandlerTest
     {
         private readonly IFighterRepository _fighterRepository;
         private readonly ICachingService _cachingService;
-        private readonly AddFighterCommandHandler addFighterCommandHandler;
+        private readonly AddFighterCommandHandler _addFighterCommandHandler;
 
-        public AddFighterCommandTest()
+        public AddFighterCommandHandlerTest()
         {
             _fighterRepository = Substitute.For<IFighterRepository>();
             _cachingService = Substitute.For<ICachingService>();
-            this.addFighterCommandHandler = new AddFighterCommandHandler(_fighterRepository, _cachingService);
+            _addFighterCommandHandler = new AddFighterCommandHandler(_fighterRepository, _cachingService);
         }
 
         [Fact]
-        public async Task Add_ShouldAddFighter_WhenInputIsValid()
+        public async Task Add_ShouldAddFighter_WhenCommandIsValid()
         {
             var command = new AddFighterCommand(
                 FullName: "Jon Jones",
@@ -66,7 +66,7 @@ namespace FightTracker.Application.Tests.Commands.FighterCommandTests
             };
 
 
-            var result = await addFighterCommandHandler.Handle(command, CancellationToken.None);
+            var result = await _addFighterCommandHandler.Handle(command, CancellationToken.None);
 
             result.Should().BeEquivalentTo(expected);
 

@@ -23,17 +23,17 @@ namespace FightTracker.Application.Fights.Command
                 FighterAId = request.FighterAId,
                 FighterBId = request.FighterBId
             };
-            await fightRepository.AddFightAsync(fight);
+            var createdFight = await fightRepository.AddFightAsync(fight);
             return new FightResponseDto
             {
-                Id = fight.Id,
-                EventId = fight.EventId,
-                Status = fight.Status.ToString(),
-                FighterAId = fight.FighterAId,
-                FighterBId = fight.FighterBId,
-                WinnerId = fight.WinnerId,
-                Method = fight.Method,
-                Time = fight.Time
+                Id = createdFight.Id,
+                EventId = createdFight.EventId,
+                Status = createdFight.Status.ToString(),
+                FighterAId = createdFight.FighterAId,
+                FighterBId = createdFight.FighterBId,
+                WinnerId = createdFight.WinnerId,
+                Method = createdFight.Method,
+                Time = createdFight.Time
             };
         }
     }
