@@ -18,7 +18,7 @@ namespace FightTracker.Application.Tests.Unit.Queries.EventQueryTests
         public GetAllEventsQueryTest()
         {
             _eventRepository = Substitute.For<IEventRepository>();
-            _sut = Substitute.For<GetAllEventsQueryHandler>(_eventRepository);
+            _sut = new GetAllEventsQueryHandler(_eventRepository);
         }
 
         [Fact]

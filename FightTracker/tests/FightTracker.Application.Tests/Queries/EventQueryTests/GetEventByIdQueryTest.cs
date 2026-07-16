@@ -22,7 +22,7 @@ namespace FightTracker.Application.Tests.Unit.Queries.EventQueryTests
         }
 
         [Fact]
-        public async Task GetById_ShouldReturnEvent_WhenEventExists()
+        public async Task GetById_ShouldReturnEvent_WhenEventExist()
         {
             var query = new GetEventByIdQuery(1);
             var existingEvent = new Event
@@ -44,7 +44,7 @@ namespace FightTracker.Application.Tests.Unit.Queries.EventQueryTests
         }
 
         [Fact]
-        public async Task GetById_ShouldReturnNull_WhenEventDoesNotExists()
+        public async Task GetById_ShouldReturnNull_WhenEventDoesNotExist()
         {
             var query = new GetEventByIdQuery(39);
 

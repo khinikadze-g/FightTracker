@@ -25,7 +25,7 @@ namespace FightTracker.Application.Tests.Unit.Commands.EventCommandTests
         }
 
         [Fact]
-        public async Task Update_ShouldUpdateEvent_WhenEventExists()
+        public async Task Update_ShouldUpdateEvent_WhenEventExist()
         {
             var command = new UpdateEventCommand(
                 Id: 5,
@@ -65,7 +65,7 @@ namespace FightTracker.Application.Tests.Unit.Commands.EventCommandTests
 
 
         [Fact]
-        public async Task Update_ShouldReturnNull_WhenEventDoesNotExists()
+        public async Task Update_ShouldReturnNull_WhenEventDoesNotExist()
         {
             var command = new UpdateEventCommand(
                 Id: 5,
@@ -76,9 +76,9 @@ namespace FightTracker.Application.Tests.Unit.Commands.EventCommandTests
 
             _eventRepository.GetEventByIdAsync(command.Id).Returns((Event?)null);
 
-            var result = _sut.Handle(command, CancellationToken.None);
+            var result = await _sut.Handle(command, CancellationToken.None);
             
-            result.Should().NotBeNull();
+            result.Should().BeNull();
 
             await _eventRepository.DidNotReceive().UpdateEventAsync(Arg.Any<int>(), Arg.Any<Event>());
 

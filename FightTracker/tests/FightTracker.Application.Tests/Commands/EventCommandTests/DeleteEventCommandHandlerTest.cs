@@ -25,7 +25,7 @@ namespace FightTracker.Application.Tests.Unit.Commands.EventCommandTests
         }
 
         [Fact]
-        public async Task Delete_ShouldDeleteEvent_WhenEventExists()
+        public async Task Delete_ShouldDeleteEvent_WhenEventExist()
         {
             var command = new DeleteEventCommand(1);
             var existingEvent = new Event
@@ -51,7 +51,7 @@ namespace FightTracker.Application.Tests.Unit.Commands.EventCommandTests
         }
 
         [Fact]
-        public async Task Delete_ShouldReturnNull_WhenEventDoesNotExists()
+        public async Task Delete_ShouldReturnNull_WhenEventDoesNotExist()
         {
             var command = new DeleteEventCommand(1);
             
