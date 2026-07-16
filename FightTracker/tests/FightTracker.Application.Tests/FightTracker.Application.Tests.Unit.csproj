@@ -29,8 +29,4 @@
     <ProjectReference Include="..\..\src\FightTracker.Core\FightTracker.Core.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Queries\FighterQueryTests\" />
-  </ItemGroup>
-
 </Project>
